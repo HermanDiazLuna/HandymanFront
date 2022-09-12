@@ -1,0 +1,50 @@
+.container{
+    padding: 50px;
+}
+
+.box {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 25px;
+}
+label{
+    display: block;
+    padding-bottom: 15px;
+}
+.box-row{
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.button-footer {
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+button {
+    margin-left: 20px;
+}
+.row{
+    width: 40%;
+    margin: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+.content-checkbox{
+    margin: auto;
+    padding-top: 50px;
+}
+
+.text-danger{
+    font-size: 12px;
+    color: red;
+}
+
+.label-checkbox{
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,0 +1,104 @@
+<form [formGroup]="form" (ngSubmit)="onClickSave()">
+    <div class="container pt-0">
+        <h1 class="text-center">Crear Servicio</h1>
+        <div class="box">
+            <div class="box-row">
+                <div class="">
+                    <label for="documentNumber" class="col-sm-3 col-form-label"><strong>Documento *</strong></label>
+                    <p-autoComplete formControlName="documentNumber" [suggestions]="filteredDataRaw" (completeMethod)="filterDataRawDocument($event)" field="idTechnical" [dropdown]="true" [forceSelection]="true">
+                        <ng-template let-document pTemplate="item">
+                            <div class="document-item">
+                                <div>{{document.idTechnical}} &nbsp; {{document.typeDocumentTechnical}}</div>
+                            </div>
+                        </ng-template>
+                    </p-autoComplete>
+                    <div *ngIf="documentNumberForm.invalid && (documentNumberForm.dirty || documentNumberForm.touched)" class="text-danger">
+                        <div *ngIf="documentNumberForm.errors?.['required']">
+                            Documento es requerido.
+                        </div>
+                        <div *ngIf="documentNumberForm.errors?.['minlength']">
+                            El Documento debe tener al menos 6 caracteres.
+                        </div>
+                        <div *ngIf="documentNumberForm.errors?.['maxlength']">
+                            El Documento debe tener máximo 10 caracteres.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-row">
+                <div>
+                    <label for="serviceNumber" class=" col-sm-3 col-form-label"><strong>Número de
+                            servicio *</strong></label>
+                    <p-autoComplete formControlName="serviceNumber" [suggestions]="filteredDataRaw" (completeMethod)="filterDataRawSerice($event)" field="idService" [dropdown]="true">
+                        <ng-template let-service pTemplate="item">
+                            <div class="service-item">
+                                <div>{{service.idService}} - {{service.typeService}}</div>
+                            </div>
+                        </ng-template>
+                    </p-autoComplete>
+
+                    <div *ngIf="serviceNumberForm.invalid && (serviceNumberForm.dirty || serviceNumberForm.touched)" class="text-danger">
+                        <div *ngIf="serviceNumberForm.errors?.['required']">
+                            Documento es requerido.
+                        </div>
+                        <div *ngIf="serviceNumberForm.errors?.['maxlength']">
+                            El Documento debe tener máximo 5 caracteres.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="box-row">
+                <div>
+                    <label for="startDate" class="p-field"><strong>Fecha y Hora inicio *</strong></label>
+                    <p-calendar [(ngModel)]="startDate" [minDate]="minDateStartHour" [maxDate]="maxDateFinish" [readonlyInput]="true" [showIcon]="true" [showTime]="true" inputId="startTime" formControlName="startDate">
+                    </p-calendar>
+                    <div *ngIf="startDateForm.invalid && (startDateForm.dirty || startDateForm.touched)" class="text-danger">
+                        <div *ngIf="startDateForm.errors?.['required']">
+                            Hora inicio es requerido.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-row">
+                <div>
+                    <label for="finishDate" class="p-field"><strong>Fecha y Hora fin *</strong></label>
+                    <p-calendar [(ngModel)]="finishDate" [minDate]="minDateStartHour" [maxDate]="maxDateFinish" [showTime]="true" inputId="finishTime" [showIcon]="true" formControlName="finishDate">
+                    </p-calendar>
+                    <div *ngIf="finishDateForm.invalid && (finishDateForm.dirty || finishDateForm.touched)" class="text-danger">
+                        <div *ngIf="finishDateForm.errors?.['required']">
+                            Hora fin es requerido.
+                        </div>
+                    </div>
+                    <div *ngIf="compareDateValid() && (finishDateForm.dirty || finishDateForm.touched)" class="text-danger">
+                        Hora fin debe ser mayor.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row content-checkbox">
+            <div>
+                <div class="p-field-checkbox">
+                    <p-checkbox (onChange)="onChange()" [(ngModel)]="selectedStatus" label="Completado" name="group1" value="true" inputId="complete" [formControl]="statusForm"></p-checkbox>
+                </div>
+            </div>
+            <div>
+                <div class="p-field-checkbox">
+                    <p-checkbox (onChange)="onChange()" [(ngModel)]="selectedStatus" label="Pendiente" name="group1" value="false" inputId="pending" [formControl]="statusForm"></p-checkbox>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="statusForm.invalid && (statusForm.dirty || statusForm.touched)" class=" label-checkbox text-danger button-footer">
+            <div *ngIf="statusForm.errors?.['required']">
+                La casilla "Completado" ó "Pendiente" es requerido.
+            </div>
+        </div>
+
+        <div class="button-footer">
+            <button pButton type="submit" class="ui-button-success" icon="fa-floppy-o" label="Guardar"></button>
+        </div>
+    </div>
+
+</form>

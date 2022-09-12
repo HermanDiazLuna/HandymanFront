@@ -1,0 +1,20 @@
+.menu{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+button {
+    margin-left: 20px;
+}
+.two{
+    color:blue ;
+}
+.box-title{
+    display: grid;
+    text-align:center;
+    justify-content: center;
+}
+.title-one{
+    display: flex;
+    align-content: center;
+}

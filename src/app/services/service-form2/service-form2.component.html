@@ -1,0 +1,82 @@
+<form [formGroup]="form" (ngSubmit)="onClickSave()">
+    <div class="container pt-0">
+        <h1 class="text-center">Horas Trabajadas</h1>
+        <div class="box">
+            <div class="box-row">
+                <div class="">
+                    <label for="documentNumber" class="col-sm-3 col-form-label"><strong>Documento *</strong></label>
+                    <p-autoComplete formControlName="documentNumber" [suggestions]="filteredDataRaw"
+                        (completeMethod)="filterDataRawDocument($event)" field="idTechnical" [dropdown]="true"
+                        [forceSelection]="true">
+                        <ng-template let-document pTemplate="item">
+                            <div class="document-item">
+                                <div>{{document.idTechnical}} &nbsp; {{document.typeDocumentTechnical}}</div>
+                            </div>
+                        </ng-template>
+                    </p-autoComplete>
+                    <div *ngIf="documentNumberForm.invalid && (documentNumberForm.dirty || documentNumberForm.touched)"
+                        class="text-danger">
+                        <div *ngIf="documentNumberForm.errors?.['required']">
+                            Documento es requerido.
+                        </div>
+                        <div *ngIf="documentNumberForm.errors?.['minlength']">
+                            El Documento debe tener al menos 6 caracteres.
+                        </div>
+                        <div *ngIf="documentNumberForm.errors?.['maxlength']">
+                            El Documento debe tener máximo 10 caracteres.
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+           <div class="box-row">
+                <div>
+                    <label for="documentNumberWeek" class="col-sm-3 col-form-label"><strong>Semana *</strong></label>
+                    <p-autoComplete formControlName="documentNumberWeek" [suggestions]="filteredDataRawWeeks"
+                        (completeMethod)="filterDataRawDocumentWeeks($event)" field="" [dropdown]="true"
+                        [forceSelection]="true">
+                        <ng-template let-document pTemplate="item">
+                            <div class="document-item">
+                                <div>{{document}}</div>
+                            </div>
+                        </ng-template>
+                    </p-autoComplete>        
+                </div>
+           </div>
+            
+        </div>
+       
+    </div>
+
+    <!-- <div class="form-group row mt-5">
+        <label class="col-form-label col-sm-2"><strong> Semanas *</strong></label>
+        <div class="col-sm-6">
+            <select name="weeks" class="form-control" name="weekSelected" style="width: 200px;">
+                <option *ngFor="let item of weeks">{{item}}</option>
+            </select>
+        </div>
+    </div> -->
+
+    
+    <div class="button-footer">
+        <button pButton type="submit" class="ui-button-success" icon="fa-floppy-o" label="Calcular"></button>
+    </div>
+    
+
+</form>
+<!-- <div class="card">
+    <div>
+        <p>{{result.normalHours}}</p>
+    </div>
+    <div>
+        <p>{{result.nightHours}}</p>
+    </div>
+    <div>
+        <p>{{result.totalHoursWorked}}</p>
+    </div>
+    <div>
+        <p>{{result.totalHoursSunday}}</p>
+    </div>
+</div> -->
+
+
